@@ -1,0 +1,33 @@
+class Solution:
+    left = "(, {, ["
+    right = "), }, ]"
+
+    def isValid(self, s: str) -> bool:
+        stack = list()
+        for c in s:
+            if c in self.left:
+                self.push(stack, c)
+            elif c in self.right:
+                if len(stack) == 0:
+                    return bool(False)
+                i = self.right.index(c)
+                if self.left[i] != stack[len(stack) - 1]:
+                    return bool(False)
+                self.pop(stack)
+        if len(stack) != 0:
+            return bool(False)
+        return bool(True)
+    
+    def push(self, stack: list, s: str):
+        stack.append(s)
+    
+    def pop(self, stack: list):
+        stack.pop()
+
+def main():
+    input = '{}'
+    solution = Solution() 
+    solution.isValid(input)
+
+if __name__ == "__main__":
+    main()
